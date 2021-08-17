@@ -30,8 +30,10 @@ class MarkovMachine {
     this.chains = chains;
   }
 
-  static choice(ar) {
-    return ar[Math.floor(Math.random() * ar.length)];
+  // return a random element from an arrray, pass in the array
+
+  static choice(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
   }
 
   /** return random text from chains */
@@ -39,13 +41,13 @@ class MarkovMachine {
   makeText(numWords = 100) {
     let keys = Array.from(this.chains.keys());
     let key = MarkovMachine.choice(keys);
-    let out = [];
+    let output = [];
 
-    while (out.length < numWords && key !== null) {
-      out.push(key);
+    while (output.length < numWords && key !== null) {
+      output.push(key);
       key = MarkovMachine.choice(this.chains.get(key));
     }
-    return out.join(" ");
+    return output.join(" ");
   }
 }
 
